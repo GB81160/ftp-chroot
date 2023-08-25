@@ -42,7 +42,7 @@ install_vsftpd() {
         sudo pacman -Sy --noconfirm vsftpd
     elif [[ $OSInfo =~ Red ]]; then
         sudo yum install vsftpd
-    elif [[ $OSInfo =~ Ubuntu ]]; then
+    elif [[ $OSInfo =~ Debian ]]; then
         sudo apt-get update
         sudo apt-get install vsftpd
     else
