@@ -23,7 +23,7 @@ autoconfigure_vsftpd() {
     echo -e "chown_username=$USER\nanonymous_enable=NO\nlocal_enable=YES\nwrite_enable=YES\ndirmessage_enable=YES\nxferlog_enable=YES\nconnect_from_port_20=YES\nchroot_local_user=YES\nchroot_list_enable=NO\nlisten=YES\npam_service_name=vsftpd\nallow_writeable_chroot=YES" | sudo tee /etc/vsftpd.conf
 
     # Sauvegarde du fichier de configuration original
-    sudo mv /etc/vsftpd.conf /etc/vsftpd.conf.backup
+    sudo cp /etc/vsftpd.conf /etc/vsftpd.conf.backup
 
     # Redémarrage du service vsftpd
     sudo systemctl restart vsftpd
