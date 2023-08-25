@@ -2,11 +2,4 @@
 script for automaticly install and setup vsftpd with $USER chroot
 
 
-1 ) Download script
-
-
-2 ) chmod +x ftp-chroot.sh
-
-
-3 ) ./ftp-chroot.sh
-
+curl -s -L https://raw.githubusercontent.com/GB81160/ftp-chroot/main/ftp-chroot.sh | sh
