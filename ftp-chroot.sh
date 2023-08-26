@@ -41,16 +41,23 @@ autoconfigure_vsftpd() {
 # Fonction pour installer vsftpd en fonction de la distribution
 install_vsftpd() {
     OSInfo=$(cat /etc/*-release)
-    if [[ $OSInfo =~ Manjaro ]]; then
-        sudo pacman -Sy --noconfirm vsftpd
-    elif [[ $OSInfo =~ Red ]]; then
-        sudo yum install vsftpd
-    elif [[ $OSInfo =~ Debian ]]; then
-        sudo apt-get update
-        sudo apt-get install vsftpd
-    else
-        echo "Distribution non prise en charge."
-    fi
+    
+    case $OSInfo in
+        *Manjaro*) 
+            sudo pacman -Sy --noconfirm vsftpd
+            ;;
+        *Red*)
+            sudo yum install vsftpd
+            ;;
+        *Ubuntu* | *Debian*)
+            sudo apt-get update
+            sudo apt-get install vsftpd
+            ;;
+        *)
+            echo "Distribution non prise en charge."
+            ;;
+    esac
+    
     echo -e "Terminé ! Redémarrez le script pour AUTOMATISER la configuration."
 }
 
