@@ -19,14 +19,16 @@ stop_ftp_server() {
 
 # Fonction pour autoconfigurer vsftpd
 autoconfigure_vsftpd() {
+    # Sauvegarde du fichier de configuration original
+    if [ -f /etc/vsftpd.conf ]; then
+        sudo cp /etc/vsftpd.conf /etc/vsftpd.conf.backup
+    fi
+
     # Ajout des paramètres de configuration au fichier vsftpd.conf
     echo -e "chown_username=$USER\nanonymous_enable=NO\nlocal_enable=YES\nwrite_enable=YES\ndirmessage_enable=YES\nxferlog_enable=YES\nconnect_from_port_20=YES\nchroot_local_user=YES\nchroot_list_enable=NO\nlisten=YES\npam_service_name=vsftpd\nallow_writeable_chroot=YES" | sudo tee /etc/vsftpd.conf
 
     # Ajout de paramètres commentés (dossier personalisé)
     echo -e "#local_root=/mnt/Freebox/wpvivid\n#user_sub_token=$USER\n#allow_writeable_chroot=YES" | sudo tee -a /etc/vsftpd.conf
-
-    # Sauvegarde du fichier de configuration original
-    sudo cp /etc/vsftpd.conf /etc/vsftpd.conf.backup
 
     # Redémarrage du service vsftpd
     sudo systemctl restart vsftpd
